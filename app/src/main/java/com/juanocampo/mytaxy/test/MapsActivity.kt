@@ -9,10 +9,18 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.LatLngBounds
+
+
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
+
+    companion object {
+        val HAMBURG = LatLng(53.5, 10.02)
+        val HAMBURG_BOUND = LatLngBounds(LatLng(53.445324, 9.585010), LatLng(53.703293, 10.433850))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,8 +44,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap = googleMap
 
         // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        mMap.setMinZoomPreference(10.0f)
+        mMap.moveCamera(CameraUpdateFactory.zoomTo(10.0f))
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(HAMBURG))
+        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(HAMBURG_BOUND.center, 10f))
+        mMap.setLatLngBoundsForCameraTarget(HAMBURG_BOUND)
+
+
     }
+
 }
