@@ -25,13 +25,9 @@ class HamburgMapFragment : SupportMapFragment(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-
-        // Add a marker in Sydney and move the camera
         mMap.setMinZoomPreference(10.0f)
         mMap.moveCamera(CameraUpdateFactory.zoomTo(10.0f))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(HAMBURG))
-        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(HAMBURG_BOUND.center, 10f))
         mMap.setLatLngBoundsForCameraTarget(HAMBURG_BOUND)
-
     }
 }

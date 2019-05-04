@@ -17,6 +17,7 @@
             android:layout_height="wrap_content"/>
 
     <android.support.v7.widget.RecyclerView
+            android:id="@+id/taxList"
             android:layout_marginTop="@dimen/margin_normal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
