@@ -6,19 +6,21 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.LinearSnapHelper
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.juanocampo.mytaxy.test.R
 import com.juanocampo.mytaxy.test.di.AndroidInjectorUtils
+import com.juanocampo.mytaxy.test.model.domain.Taxi
 import com.juanocampo.mytaxy.test.view.adapter.TaxiAdapter
 import com.juanocampo.mytaxy.test.viewmodel.TaxiViewModel
 import com.juanocampo.mytaxy.test.viewmodel.TaxiViewModelFactory
 import kotlinx.android.synthetic.main.list_view.*
 import javax.inject.Inject
 
-class TaxisListFragment: Fragment() {
+class TaxisListFragment: Fragment(){
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.list_view, container, false)
@@ -40,17 +42,22 @@ class TaxisListFragment: Fragment() {
     }
 
     private fun subscribeViewModel() {
-        viewModel.taxiListLiveData.observe(this, Observer {
+        viewModel.taxiMapLiveData.observe(this, Observer {
             it?.let { items ->
                 progress.visibility = View.GONE
-                adapter.addItems(items)
+                adapter.items.clear()
+                adapter.addItems(ArrayList(items.values))
             }
         })
         viewModel.errorLiveData.observe(this, Observer { error ->
             Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
         })
-    }
 
+        viewModel.requestListFocusLiveData.observe(this, Observer {
+            taxList.smoothScrollToPosition(adapter.items.indexOf(it))
+        })
+
+    }
 
     private fun initUIComponents() {
         val manager = LinearLayoutManager(context)
@@ -61,5 +68,4 @@ class TaxisListFragment: Fragment() {
         val snapHelper = LinearSnapHelper()
         snapHelper.attachToRecyclerView(taxList)
     }
-
 }

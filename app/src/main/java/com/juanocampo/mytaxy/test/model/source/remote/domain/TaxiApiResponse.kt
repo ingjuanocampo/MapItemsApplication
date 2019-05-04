@@ -4,4 +4,4 @@ data class TaxiApiResponse(val poiList: List<TaxiResponse>?)
 
 data class TaxiResponse(val id: Int?, val coordinate: Coordinate?)
 
-data class Coordinate(val latitude: Float?, val longitude: Float?)
+data class Coordinate(val latitude: Double?, val longitude: Double?)

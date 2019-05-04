@@ -1,9 +1,14 @@
 package com.juanocampo.mytaxy.test.viewmodel
 
+import android.arch.core.util.Function
+import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
 import android.support.annotation.UiThread
 import android.support.annotation.WorkerThread
+import android.support.v7.widget.RecyclerView
+import com.google.android.gms.maps.model.LatLng
 import com.juanocampo.mytaxy.test.model.IRepository
 import com.juanocampo.mytaxy.test.model.domain.Resource
 import com.juanocampo.mytaxy.test.model.domain.Status
@@ -16,9 +21,18 @@ class TaxiViewModel(private val iRepository: IRepository,
                     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO): ViewModel() {
 
     val errorLiveData = MutableLiveData<String>()
-    val taxiListLiveData = MutableLiveData<ArrayList<RecyclerViewType>>()
+    val taxiMapLiveData = MutableLiveData<HashMap<LatLng, RecyclerViewType>>()
+
+    val itemFocused = MutableLiveData<LatLng>()
+    val requestListFocusLiveData: LiveData<RecyclerViewType>
     private var isLoading = false
-    private val items: ArrayList<RecyclerViewType> = ArrayList()
+    private val mapItems: HashMap<LatLng, RecyclerViewType> = HashMap()
+
+    init {
+        requestListFocusLiveData = Transformations.map(itemFocused, Function {
+            return@Function mapItems[it]
+        })
+    }
 
     fun fetchTaxisByLocationPage(p1Lat: Double, p1Lon: Double, p2Lat: Double, p2Lon: Double) {
         GlobalScope.launch(ioDispatcher) {
@@ -67,21 +81,13 @@ class TaxiViewModel(private val iRepository: IRepository,
     }
 
     @WorkerThread
-    private suspend fun addItemAndNotify(item: RecyclerViewType) {
-        items.add(item)
-        publishUIResults(taxiListLiveData, items)
-    }
-
-    @WorkerThread
     private suspend fun addItemsAndNotify(itemsToAdd: List<RecyclerViewType>) {
-        items.addAll(itemsToAdd)
-        publishUIResults(taxiListLiveData, items)
-    }
-
-    @WorkerThread
-    private suspend fun removeItemsAndNotify(item: RecyclerViewType) {
-        items.remove(item)
-        publishUIResults(taxiListLiveData, items)
+        itemsToAdd.forEach {
+            if (it is Taxi) {
+                mapItems[it.latLong] = it
+            }
+        }
+        publishUIResults(taxiMapLiveData, mapItems)
     }
 
     @UiThread

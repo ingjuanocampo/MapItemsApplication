@@ -1,5 +1,6 @@
 package com.juanocampo.mytaxy.test.view.fragment
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.View
@@ -9,7 +10,10 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
+import com.google.android.gms.maps.model.MarkerOptions
 import com.juanocampo.mytaxy.test.di.AndroidInjectorUtils
+import com.juanocampo.mytaxy.test.model.domain.Taxi
+import com.juanocampo.mytaxy.test.utils.delegate.model.RecyclerViewType
 import com.juanocampo.mytaxy.test.viewmodel.TaxiViewModel
 import com.juanocampo.mytaxy.test.viewmodel.TaxiViewModelFactory
 import javax.inject.Inject
@@ -25,20 +29,46 @@ class HamburgMapFragment : SupportMapFragment(), OnMapReadyCallback {
     @Inject
     lateinit var viewModelFactory: TaxiViewModelFactory
 
+    private lateinit var viewModel: TaxiViewModel
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getMapAsync(this)
         AndroidInjectorUtils.inject(this)
-        var viewModel = ViewModelProviders.of(activity!!, viewModelFactory).get(TaxiViewModel::class.java)
+        viewModel = ViewModelProviders.of(activity!!, viewModelFactory).get(TaxiViewModel::class.java)
         viewModel.fetchTaxisByLocationPage(HAMBURG_BOUND.southwest.latitude, HAMBURG_BOUND.southwest.longitude,
             HAMBURG_BOUND.northeast.latitude, HAMBURG_BOUND.northeast.longitude)
     }
 
+    private fun addMarkerToMap(taxis: ArrayList<RecyclerViewType>) {
+        mMap.clear()
+        taxis.forEach {
+            if (it is Taxi) {
+                val markerOptions = MarkerOptions()
+                markerOptions.position(it.latLong)
+                markerOptions.title("Cab id: ${it.id}")
+                mMap.addMarker(markerOptions)
+            }
+        }
+    }
+
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-        mMap.setMinZoomPreference(10.0f)
         mMap.moveCamera(CameraUpdateFactory.zoomTo(10.0f))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(HAMBURG))
         mMap.setLatLngBoundsForCameraTarget(HAMBURG_BOUND)
+
+        mMap.setOnMarkerClickListener {
+            viewModel.itemFocused.value = it.position
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(it.position, 13f))
+            it.showInfoWindow()
+            return@setOnMarkerClickListener true
+        }
+
+        viewModel.taxiMapLiveData.observe(this, Observer {
+            it?.let { taxis ->
+                addMarkerToMap(ArrayList(taxis.values))
+            }
+        })
     }
 }
