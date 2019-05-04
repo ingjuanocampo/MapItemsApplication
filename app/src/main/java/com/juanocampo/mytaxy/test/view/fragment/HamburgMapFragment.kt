@@ -59,8 +59,7 @@ class HamburgMapFragment : SupportMapFragment(), OnMapReadyCallback {
         mMap.setLatLngBoundsForCameraTarget(HAMBURG_BOUND)
 
         mMap.setOnMarkerClickListener {
-            viewModel.itemFocused.value = it.position
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(it.position, 13f))
+            animateCamera(it.position)
             it.showInfoWindow()
             return@setOnMarkerClickListener true
         }
@@ -70,5 +69,16 @@ class HamburgMapFragment : SupportMapFragment(), OnMapReadyCallback {
                 addMarkerToMap(ArrayList(taxis.values))
             }
         })
+
+        viewModel.getRequestMapObserver().observe(this, Observer {
+            animateCamera(it)
+        })
+    }
+
+    private fun animateCamera(position: LatLng?) {
+        position?.let {
+            viewModel.setClickedMarker(it)
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(it, 13f))
+        }
     }
 }

@@ -5,10 +5,10 @@ import com.juanocampo.mytaxy.test.model.domain.Taxi
 import com.juanocampo.mytaxy.test.utils.delegate.BaseAdapter
 import com.juanocampo.mytaxy.test.utils.delegate.appendDelegate
 
-class TaxiAdapter: BaseAdapter() {
+class TaxiAdapter(listener: TaxiDelegateAdapter.OnItemListListener): BaseAdapter() {
 
     init {
         delegateAdapters = SparseArrayCompat(2)
-        delegateAdapters.appendDelegate(Taxi.TAXI_ITEM.hashCode(), TaxiDelegateAdapter())
+        delegateAdapters.appendDelegate(Taxi.TAXI_ITEM.hashCode(), TaxiDelegateAdapter(listener))
     }
 }

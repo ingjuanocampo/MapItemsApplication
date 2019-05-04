@@ -8,14 +8,18 @@ import com.juanocampo.mytaxy.test.R
 import com.juanocampo.mytaxy.test.model.domain.Taxi
 import com.juanocampo.mytaxy.test.utils.delegate.DelegateAdapter
 
-class TaxiDelegateAdapter: DelegateAdapter<TaxiDelegateAdapter.ViewHolder, Taxi>  {
+class TaxiDelegateAdapter(val listener: OnItemListListener): DelegateAdapter<TaxiDelegateAdapter.ViewHolder, Taxi>  {
+
+    interface OnItemListListener {
+        fun onClickedItem(taxi: Taxi)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup): ViewHolder {
         return ViewHolder(parent)
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, viewType: Taxi) {
-        viewHolder.bind(viewType)
+        viewHolder.bind(viewType, listener)
     }
 
     class ViewHolder(viewGroup: ViewGroup) :
@@ -23,8 +27,11 @@ class TaxiDelegateAdapter: DelegateAdapter<TaxiDelegateAdapter.ViewHolder, Taxi>
 
         private val title = itemView.findViewById<TextView>(R.id.cab_id)
 
-        fun bind(taxi: Taxi) {
+        fun bind(taxi: Taxi, listener: OnItemListListener) {
             title.text = "Cab id: ${taxi.id}"
+            itemView.setOnClickListener {
+                listener.onClickedItem(taxi)
+            }
         }
     }
 

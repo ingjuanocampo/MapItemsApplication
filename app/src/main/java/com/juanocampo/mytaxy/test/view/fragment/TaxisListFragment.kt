@@ -15,12 +15,13 @@ import com.juanocampo.mytaxy.test.R
 import com.juanocampo.mytaxy.test.di.AndroidInjectorUtils
 import com.juanocampo.mytaxy.test.model.domain.Taxi
 import com.juanocampo.mytaxy.test.view.adapter.TaxiAdapter
+import com.juanocampo.mytaxy.test.view.adapter.TaxiDelegateAdapter
 import com.juanocampo.mytaxy.test.viewmodel.TaxiViewModel
 import com.juanocampo.mytaxy.test.viewmodel.TaxiViewModelFactory
 import kotlinx.android.synthetic.main.list_view.*
 import javax.inject.Inject
 
-class TaxisListFragment: Fragment(){
+class TaxisListFragment: Fragment(), TaxiDelegateAdapter.OnItemListListener {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.list_view, container, false)
@@ -53,7 +54,7 @@ class TaxisListFragment: Fragment(){
             Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
         })
 
-        viewModel.requestListFocusLiveData.observe(this, Observer {
+        viewModel.getRequestListObserver().observe(this, Observer {
             taxList.smoothScrollToPosition(adapter.items.indexOf(it))
         })
 
@@ -63,9 +64,13 @@ class TaxisListFragment: Fragment(){
         val manager = LinearLayoutManager(context)
         manager.orientation = LinearLayoutManager.HORIZONTAL
         taxList.layoutManager = manager
-        adapter = TaxiAdapter()
+        adapter = TaxiAdapter(this)
         taxList.adapter = adapter
         val snapHelper = LinearSnapHelper()
         snapHelper.attachToRecyclerView(taxList)
+    }
+
+    override fun onClickedItem(taxi: Taxi) {
+        viewModel.setClickedItem(taxi)
     }
 }

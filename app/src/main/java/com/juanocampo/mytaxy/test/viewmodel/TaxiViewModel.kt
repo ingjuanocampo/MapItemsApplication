@@ -7,7 +7,6 @@ import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
 import android.support.annotation.UiThread
 import android.support.annotation.WorkerThread
-import android.support.v7.widget.RecyclerView
 import com.google.android.gms.maps.model.LatLng
 import com.juanocampo.mytaxy.test.model.IRepository
 import com.juanocampo.mytaxy.test.model.domain.Resource
@@ -23,14 +22,21 @@ class TaxiViewModel(private val iRepository: IRepository,
     val errorLiveData = MutableLiveData<String>()
     val taxiMapLiveData = MutableLiveData<HashMap<LatLng, RecyclerViewType>>()
 
-    val itemFocused = MutableLiveData<LatLng>()
-    val requestListFocusLiveData: LiveData<RecyclerViewType>
+    private val mapClickedLivedData = MutableLiveData<LatLng>()
+    private val itemCLickedLiveData =  MutableLiveData<Taxi>()
+    private val requestListFocusLiveData: LiveData<RecyclerViewType>
+    private val requestMapFocusLiveData: LiveData<LatLng>
+
     private var isLoading = false
     private val mapItems: HashMap<LatLng, RecyclerViewType> = HashMap()
 
     init {
-        requestListFocusLiveData = Transformations.map(itemFocused, Function {
+        requestListFocusLiveData = Transformations.map(mapClickedLivedData, Function {
             return@Function mapItems[it]
+        })
+
+        requestMapFocusLiveData = Transformations.map(itemCLickedLiveData, Function {
+            return@Function it.latLong
         })
     }
 
@@ -96,4 +102,17 @@ class TaxiViewModel(private val iRepository: IRepository,
             liveData.value = data
         }
     }
+
+    @UiThread
+    fun setClickedMarker(latLng: LatLng) {
+        mapClickedLivedData.value = latLng
+    }
+    @UiThread
+    fun setClickedItem(taxi: Taxi) {
+        itemCLickedLiveData.value = taxi
+    }
+
+    fun getRequestListObserver() = requestListFocusLiveData
+
+    fun getRequestMapObserver() = requestMapFocusLiveData
 }
