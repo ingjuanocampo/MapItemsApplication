@@ -8,9 +8,11 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
+import com.juanocampo.mytaxy.test.R
 import com.juanocampo.mytaxy.test.di.AndroidInjectorUtils
 import com.juanocampo.mytaxy.test.model.domain.Taxi
 import com.juanocampo.mytaxy.test.utils.delegate.model.RecyclerViewType
@@ -47,6 +49,7 @@ class HamburgMapFragment : SupportMapFragment(), OnMapReadyCallback {
                 val markerOptions = MarkerOptions()
                 markerOptions.position(it.latLong)
                 markerOptions.title("Cab id: ${it.id}")
+                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.baseline_local_taxi_black_18dp))
                 mMap.addMarker(markerOptions)
             }
         }

@@ -5,6 +5,8 @@
                                              android:layout_height="@dimen/list_size">
 
     <TextView
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"
             android:id="@+id/title"
             android:layout_margin="@dimen/margin_normal"
             android:drawableLeft="@drawable/ic_baseline_list_24px"
