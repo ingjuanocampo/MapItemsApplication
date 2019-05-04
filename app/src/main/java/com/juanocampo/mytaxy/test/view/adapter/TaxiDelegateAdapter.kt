@@ -24,7 +24,7 @@ class TaxiDelegateAdapter: DelegateAdapter<TaxiDelegateAdapter.ViewHolder, Taxi>
         private val title = itemView.findViewById<TextView>(R.id.cab_id)
 
         fun bind(taxi: Taxi) {
-            title.text = "Cab id: $taxi.id"
+            title.text = "Cab id: ${taxi.id}"
         }
     }
 
