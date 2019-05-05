@@ -10,6 +10,7 @@ import com.juanocampo.mytaxy.test.model.source.remote.service.TaxiApi
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 
@@ -22,6 +23,8 @@ class RepositoryModule {
         val builder: Retrofit.Builder = Retrofit.Builder()
             .baseUrl("https://fake-poi-api.mytaxi.com/")
             .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+
 
         val retrofit = builder.build()
         return retrofit.create(TaxiApi::class.java)

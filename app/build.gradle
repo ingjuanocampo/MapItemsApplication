@@ -27,6 +27,9 @@ dependencies {
     def lifecycle_version = "1.1.1"
     def daggerVersion = '2.19'
     def kotlinCoroutineVersion = '1.0.1'
+    def rxAndroidVersion = '2.1.0'
+    def rxJavaVersion = '2.2.3'
+    def retrofitVersion = '2.5.0'
 
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -40,12 +43,13 @@ dependencies {
     annotationProcessor "android.arch.persistence.room:compiler:$room_version"
 
     // Retrofit
-    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation "com.squareup.retrofit2:retrofit:${retrofitVersion}"
+    implementation "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
 
-    //coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutineVersion"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinCoroutineVersion"
+    //RX
+    implementation "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}"
+    implementation "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}"
 
     // Dagger 2
     implementation "com.google.dagger:dagger:$daggerVersion"
