@@ -8,10 +8,8 @@ import android.arch.lifecycle.ViewModel
 import android.support.annotation.UiThread
 import com.google.android.gms.maps.model.LatLng
 import com.juanocampo.mytaxy.test.model.IRepository
-import com.juanocampo.mytaxy.test.model.domain.Resource
 import com.juanocampo.mytaxy.test.model.domain.Status
 import com.juanocampo.mytaxy.test.model.domain.Taxi
-import com.juanocampo.mytaxy.test.utils.delegate.model.RecyclerViewType
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -19,14 +17,14 @@ import io.reactivex.schedulers.Schedulers
 class TaxiViewModel(private val iRepository: IRepository) : ViewModel() {
 
     val errorLiveData = MutableLiveData<String>()
-    val taxiMapLiveData = MutableLiveData<HashMap<LatLng, RecyclerViewType>>()
+    val taxiMapLiveData = MutableLiveData<HashMap<LatLng, Taxi>>()
 
     private val mapClickedLivedData = MutableLiveData<LatLng>()
     private val itemCLickedLiveData = MutableLiveData<Taxi>()
-    private val requestListFocusLiveData: LiveData<RecyclerViewType>
+    private val requestListFocusLiveData: LiveData<Taxi>
     private val requestMapFocusLiveData: LiveData<LatLng>
 
-    private val mapItems: HashMap<LatLng, RecyclerViewType> = HashMap()
+    private var mapItems: HashMap<LatLng, Taxi> = HashMap()
 
     init {
         requestListFocusLiveData = Transformations.map(mapClickedLivedData, Function {
@@ -46,19 +44,23 @@ class TaxiViewModel(private val iRepository: IRepository) : ViewModel() {
             p1Lon,
             p2Lat,
             p2Lon
-        ).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe({ response ->
-                when {
-                    response.status == Status.SUCCESS -> {
-                        handleSuccessCase(response)
-                    }
-                    else -> {
-                        handleErrorCase(response.message)
+        ).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ response ->
+            when {
+                response.status == Status.SUCCESS -> {
+                    response.info?.let {
+                        mapItems = response.info
+                        publishUIResults(taxiMapLiveData, mapItems)
                     }
                 }
+                else -> {
+                    handleErrorCase(response.message)
+                }
+            }
 
-            }, {
-                handleErrorCase(it.message ?: "Something when wrong, please try later")
-            })
+        }, {
+            handleErrorCase(it.message ?: "Something when wrong, please try later")
+        })
     }
 
     override fun onCleared() {
@@ -66,23 +68,8 @@ class TaxiViewModel(private val iRepository: IRepository) : ViewModel() {
         disposable?.dispose()
     }
 
-    private fun handleSuccessCase(response: Resource<List<Taxi>>) {
-        response.info?.let {
-            addItemsAndNotify(it)
-        }
-    }
-
     private fun handleErrorCase(message: String) {
         publishUIResults(errorLiveData, message)
-    }
-
-    private fun addItemsAndNotify(itemsToAdd: List<RecyclerViewType>) {
-        itemsToAdd.forEach {
-            if (it is Taxi) {
-                mapItems[it.latLong] = it
-            }
-        }
-        publishUIResults(taxiMapLiveData, mapItems)
     }
 
     @UiThread

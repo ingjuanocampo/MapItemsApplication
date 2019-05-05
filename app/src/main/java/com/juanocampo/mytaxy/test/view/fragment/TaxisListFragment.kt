@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.LinearSnapHelper
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +13,7 @@ import android.widget.Toast
 import com.juanocampo.mytaxy.test.R
 import com.juanocampo.mytaxy.test.di.AndroidInjectorUtils
 import com.juanocampo.mytaxy.test.model.domain.Taxi
+import com.juanocampo.mytaxy.test.utils.delegate.model.RecyclerViewType
 import com.juanocampo.mytaxy.test.view.adapter.TaxiAdapter
 import com.juanocampo.mytaxy.test.view.adapter.TaxiDelegateAdapter
 import com.juanocampo.mytaxy.test.viewmodel.TaxiViewModel
@@ -54,8 +54,8 @@ class TaxisListFragment: Fragment(), TaxiDelegateAdapter.OnItemListListener {
             Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
         })
 
-        viewModel.getRequestListObserver().observe(this, Observer {
-            taxList.smoothScrollToPosition(adapter.items.indexOf(it))
+        viewModel.getRequestListObserver().observe(this, Observer {taxi ->
+            taxList.smoothScrollToPosition(adapter.items.indexOf(taxi as RecyclerViewType))
         })
 
     }
