@@ -1,6 +1,5 @@
 package com.juanocampo.mytaxy.test.model.di
 
-import com.juanocampo.mytaxy.test.di.ApplicationScope
 import com.juanocampo.mytaxy.test.model.IRepository
 import com.juanocampo.mytaxy.test.model.Repository
 import com.juanocampo.mytaxy.test.model.source.remote.IRemoteDataSource
@@ -12,11 +11,10 @@ import dagger.Provides
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-
 @Module
 class RepositoryModule {
 
-    @ApplicationScope
+    @RepositoryScope
     @Provides
     fun providesApi(): TaxiApi {
         val builder: Retrofit.Builder = Retrofit.Builder()
@@ -27,11 +25,11 @@ class RepositoryModule {
         return retrofit.create(TaxiApi::class.java)
     }
 
-    @ApplicationScope
+    @RepositoryScope
     @Provides
     fun providesRemoteDataSource(taxiApi: TaxiApi): IRemoteDataSource = RemoteDataSource(api = taxiApi)
 
-    @ApplicationScope
+    @RepositoryScope
     @Provides
     fun providesMapper() = TaxiMapper()
 

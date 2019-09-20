@@ -15,8 +15,7 @@ class TaxiApp: Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
-        component = DaggerAppComponent.builder().build()
-
+        component = DaggerAppComponent.builder().application(this).build()
     }
 
 }
