@@ -8,12 +8,11 @@ import javax.inject.Scope
 @kotlin.annotation.Retention(AnnotationRetention.RUNTIME)
 annotation class RepositoryScope
 
-
 @RepositoryScope
 @Subcomponent(modules = [RepositoryModule::class])
 interface RepositorySubComponent {
 
-    fun providesIRepository(): IRepository
+    fun providesRepository(): IRepository
 
     @Subcomponent.Builder
     interface Builder {

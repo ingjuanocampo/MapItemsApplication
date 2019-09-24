@@ -14,7 +14,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 @Module
 class RepositoryModule {
 
-    @RepositoryScope
     @Provides
     fun providesApi(): TaxiApi {
         val builder: Retrofit.Builder = Retrofit.Builder()
@@ -25,11 +24,9 @@ class RepositoryModule {
         return retrofit.create(TaxiApi::class.java)
     }
 
-    @RepositoryScope
     @Provides
     fun providesRemoteDataSource(taxiApi: TaxiApi): IRemoteDataSource = RemoteDataSource(api = taxiApi)
 
-    @RepositoryScope
     @Provides
     fun providesMapper() = TaxiMapper()
 
