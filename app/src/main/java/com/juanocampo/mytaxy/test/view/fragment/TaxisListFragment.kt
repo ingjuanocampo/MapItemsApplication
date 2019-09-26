@@ -11,7 +11,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.juanocampo.mytaxy.test.R
-import com.juanocampo.mytaxy.test.di.AndroidInjectorUtils
 import com.juanocampo.mytaxy.test.data.entity.Taxi
 import com.juanocampo.mytaxy.test.view.adapter.TaxiAdapter
 import com.juanocampo.mytaxy.test.view.adapter.TaxiDelegateAdapter
@@ -19,6 +18,9 @@ import com.juanocampo.mytaxy.test.presentation.viewmodel.TaxiViewModel
 import com.juanocampo.mytaxy.test.presentation.viewmodel.TaxiViewModelFactory
 import kotlinx.android.synthetic.main.list_view.*
 import javax.inject.Inject
+import dagger.android.support.AndroidSupportInjection
+import android.content.Context
+
 
 class TaxisListFragment: Fragment(), TaxiDelegateAdapter.OnItemListListener {
 
@@ -33,9 +35,13 @@ class TaxisListFragment: Fragment(), TaxiDelegateAdapter.OnItemListListener {
 
     private lateinit var viewModel: TaxiViewModel
 
+    override fun onAttach(context: Context) {
+        AndroidSupportInjection.inject(this)
+        super.onAttach(context)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        AndroidInjectorUtils.inject(this)
         initUIComponents()
         viewModel = ViewModelProviders.of(activity!!, viewModelFactory).get(TaxiViewModel::class.java)
         subscribeViewModel()

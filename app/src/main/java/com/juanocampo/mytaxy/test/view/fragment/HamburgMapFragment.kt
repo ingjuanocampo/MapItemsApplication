@@ -28,18 +28,17 @@ class HamburgMapFragment : SupportMapFragment(), OnMapReadyCallback {
         val HAMBURG = LatLng(53.5, 10.02)
         val HAMBURG_BOUND = LatLngBounds(LatLng(53.445324, 9.585010), LatLng(53.703293, 10.433850))
     }
-    @Inject
-    lateinit var viewModelFactory: TaxiViewModelFactory
+    //@Inject
+    //lateinit var viewModelFactory: TaxiViewModelFactory
 
     private lateinit var viewModel: TaxiViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getMapAsync(this)
-        AndroidInjectorUtils.inject(this)
-        viewModel = ViewModelProviders.of(activity!!, viewModelFactory).get(TaxiViewModel::class.java)
+       /* viewModel = ViewModelProviders.of(activity!!, viewModelFactory).get(TaxiViewModel::class.java)
         viewModel.fetchTaxisByLocationPage(HAMBURG_BOUND.southwest.latitude, HAMBURG_BOUND.southwest.longitude,
-            HAMBURG_BOUND.northeast.latitude, HAMBURG_BOUND.northeast.longitude)
+            HAMBURG_BOUND.northeast.latitude, HAMBURG_BOUND.northeast.longitude)*/
     }
 
     private fun addMarkerToMap(taxis: ArrayList<RecyclerViewType>) {

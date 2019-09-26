@@ -1,14 +1,13 @@
 package com.juanocampo.mytaxy.test.view.di
 
-import com.juanocampo.mytaxy.test.view.fragment.TaxisListFragment
+import com.juanocampo.mytaxy.test.view.MapsActivity
 import dagger.Subcomponent
 import dagger.android.AndroidInjector
 
 @MainScreenScope
 @Subcomponent(modules = [PresentationMainModule::class])
-interface MainScreenComponent: AndroidInjector<TaxisListFragment> {
+interface MapActivityComponent: AndroidInjector<MapsActivity> {
 
     @Subcomponent.Builder
-    abstract class Builder: AndroidInjector.Builder<TaxisListFragment>()
-
+    abstract class Builder: AndroidInjector.Builder<MapsActivity>()
 }
