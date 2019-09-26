@@ -1,9 +1,9 @@
-package com.juanocampo.mytaxy.test.model
+package com.juanocampo.mytaxy.test.data
 
-import com.juanocampo.mytaxy.test.model.domain.Resource
-import com.juanocampo.mytaxy.test.model.domain.Taxi
-import com.juanocampo.mytaxy.test.model.source.remote.IRemoteDataSource
-import com.juanocampo.mytaxy.test.model.source.remote.mapper.TaxiMapper
+import com.juanocampo.mytaxy.test.data.entity.Taxi
+import com.juanocampo.mytaxy.test.data.source.remote.IRemoteDataSource
+import com.juanocampo.mytaxy.test.data.source.remote.mapper.TaxiMapper
+import com.juanocampo.mytaxy.test.domain.IRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -16,7 +16,7 @@ class Repository(
 
     override suspend fun requestTaxisByLocation(
         p1Lat: Double, p1Lon: Double, p2Lat: Double, p2Lon: Double
-    ): Resource<List<Taxi>> {
+    ): List<Taxi> {
         return withContext(ioDispatcher) {
             return@withContext fetchTaxisFromRemote(
                 p1Lat,
@@ -29,22 +29,14 @@ class Repository(
 
     private fun fetchTaxisFromRemote(
         p1Lat: Double, p1Lon: Double, p2Lat: Double, p2Lon: Double
-    ): Resource<List<Taxi>> {
-        return try {
+    ): List<Taxi> {
             val fetchedItems = iRemoteDataSource.fetchTaxisByLocation(
                 p1Lat,
                 p1Lon,
                 p2Lat,
                 p2Lon
             )
-            if (fetchedItems.isNullOrEmpty()) {
-                Resource.error("could not load info, try later")
-            } else {
-                val mappedItems = iMapper.mapResponseToAppModel(fetchedItems)
-                Resource.success(mappedItems)
-            }
-        } catch (e: Exception) {
-            Resource.error(e.message ?: "Something went wrong ")
-        }
+            check(!fetchedItems.isNullOrEmpty()) { "Could not get valid information" }
+        return iMapper.mapResponseToAppModel(fetchedItems)
     }
 }

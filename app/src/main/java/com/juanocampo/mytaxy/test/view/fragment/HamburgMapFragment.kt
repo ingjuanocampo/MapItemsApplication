@@ -14,10 +14,10 @@ import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
 import com.juanocampo.mytaxy.test.R
 import com.juanocampo.mytaxy.test.di.AndroidInjectorUtils
-import com.juanocampo.mytaxy.test.model.domain.Taxi
+import com.juanocampo.mytaxy.test.data.entity.Taxi
 import com.juanocampo.mytaxy.test.utils.delegate.model.RecyclerViewType
-import com.juanocampo.mytaxy.test.viewmodel.TaxiViewModel
-import com.juanocampo.mytaxy.test.viewmodel.TaxiViewModelFactory
+import com.juanocampo.mytaxy.test.presentation.viewmodel.TaxiViewModel
+import com.juanocampo.mytaxy.test.presentation.viewmodel.TaxiViewModelFactory
 import javax.inject.Inject
 
 class HamburgMapFragment : SupportMapFragment(), OnMapReadyCallback {

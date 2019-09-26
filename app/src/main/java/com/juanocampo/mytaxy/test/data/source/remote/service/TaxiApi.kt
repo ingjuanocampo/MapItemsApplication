@@ -1,6 +1,6 @@
-package com.juanocampo.mytaxy.test.model.source.remote.service
+package com.juanocampo.mytaxy.test.data.source.remote.service
 
-import com.juanocampo.mytaxy.test.model.source.remote.domain.TaxiApiResponse
+import com.juanocampo.mytaxy.test.data.source.remote.domain.TaxiApiResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

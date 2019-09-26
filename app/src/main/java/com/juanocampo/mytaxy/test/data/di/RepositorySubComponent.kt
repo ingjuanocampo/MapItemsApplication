@@ -1,6 +1,6 @@
-package com.juanocampo.mytaxy.test.model.di
+package com.juanocampo.mytaxy.test.data.di
 
-import com.juanocampo.mytaxy.test.model.IRepository
+import com.juanocampo.mytaxy.test.domain.IRepository
 import dagger.Subcomponent
 import javax.inject.Scope
 

@@ -1,6 +1,6 @@
-package com.juanocampo.mytaxy.test.model.source.remote
+package com.juanocampo.mytaxy.test.data.source.remote
 
-import com.juanocampo.mytaxy.test.model.source.remote.domain.TaxiResponse
+import com.juanocampo.mytaxy.test.data.source.remote.domain.TaxiResponse
 
 interface IRemoteDataSource {
 

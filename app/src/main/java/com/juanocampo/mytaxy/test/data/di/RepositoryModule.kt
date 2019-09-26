@@ -1,11 +1,11 @@
-package com.juanocampo.mytaxy.test.model.di
+package com.juanocampo.mytaxy.test.data.di
 
-import com.juanocampo.mytaxy.test.model.IRepository
-import com.juanocampo.mytaxy.test.model.Repository
-import com.juanocampo.mytaxy.test.model.source.remote.IRemoteDataSource
-import com.juanocampo.mytaxy.test.model.source.remote.RemoteDataSource
-import com.juanocampo.mytaxy.test.model.source.remote.mapper.TaxiMapper
-import com.juanocampo.mytaxy.test.model.source.remote.service.TaxiApi
+import com.juanocampo.mytaxy.test.domain.IRepository
+import com.juanocampo.mytaxy.test.data.Repository
+import com.juanocampo.mytaxy.test.data.source.remote.IRemoteDataSource
+import com.juanocampo.mytaxy.test.data.source.remote.RemoteDataSource
+import com.juanocampo.mytaxy.test.data.source.remote.mapper.TaxiMapper
+import com.juanocampo.mytaxy.test.data.source.remote.service.TaxiApi
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -25,7 +25,8 @@ class RepositoryModule {
     }
 
     @Provides
-    fun providesRemoteDataSource(taxiApi: TaxiApi): IRemoteDataSource = RemoteDataSource(api = taxiApi)
+    fun providesRemoteDataSource(taxiApi: TaxiApi): IRemoteDataSource =
+        RemoteDataSource(api = taxiApi)
 
     @Provides
     fun providesMapper() = TaxiMapper()

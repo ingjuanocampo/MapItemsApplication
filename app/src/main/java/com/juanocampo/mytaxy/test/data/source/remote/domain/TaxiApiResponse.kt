@@ -1,4 +1,4 @@
-package com.juanocampo.mytaxy.test.model.source.remote.domain
+package com.juanocampo.mytaxy.test.data.source.remote.domain
 
 data class TaxiApiResponse(val poiList: List<TaxiResponse>?)
 

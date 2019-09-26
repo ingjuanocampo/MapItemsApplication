@@ -1,4 +1,4 @@
-package com.juanocampo.mytaxy.test.model.domain
+package com.juanocampo.mytaxy.test.data.entity
 
 import com.google.android.gms.maps.model.LatLng
 import com.juanocampo.mytaxy.test.utils.delegate.model.RecyclerViewType

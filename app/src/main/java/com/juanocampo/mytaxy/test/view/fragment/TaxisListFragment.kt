@@ -6,18 +6,17 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.LinearSnapHelper
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.juanocampo.mytaxy.test.R
 import com.juanocampo.mytaxy.test.di.AndroidInjectorUtils
-import com.juanocampo.mytaxy.test.model.domain.Taxi
+import com.juanocampo.mytaxy.test.data.entity.Taxi
 import com.juanocampo.mytaxy.test.view.adapter.TaxiAdapter
 import com.juanocampo.mytaxy.test.view.adapter.TaxiDelegateAdapter
-import com.juanocampo.mytaxy.test.viewmodel.TaxiViewModel
-import com.juanocampo.mytaxy.test.viewmodel.TaxiViewModelFactory
+import com.juanocampo.mytaxy.test.presentation.viewmodel.TaxiViewModel
+import com.juanocampo.mytaxy.test.presentation.viewmodel.TaxiViewModelFactory
 import kotlinx.android.synthetic.main.list_view.*
 import javax.inject.Inject
 

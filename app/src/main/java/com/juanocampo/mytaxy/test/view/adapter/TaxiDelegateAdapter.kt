@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import com.juanocampo.mytaxy.test.R
-import com.juanocampo.mytaxy.test.model.domain.Taxi
+import com.juanocampo.mytaxy.test.data.entity.Taxi
 import com.juanocampo.mytaxy.test.utils.delegate.DelegateAdapter
 
 class TaxiDelegateAdapter(val listener: OnItemListListener): DelegateAdapter<TaxiDelegateAdapter.ViewHolder, Taxi>  {
