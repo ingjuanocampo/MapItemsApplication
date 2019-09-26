@@ -4,9 +4,9 @@ import com.juanocampo.mytaxy.test.view.fragment.HamburgMapFragment
 import com.juanocampo.mytaxy.test.view.fragment.TaxisListFragment
 import dagger.Subcomponent
 
-@ViewScope
-@Subcomponent(modules = [ViewModule::class])
-interface ViewComponent {
+@MainScreenScope
+@Subcomponent(modules = [PresentationMainModule::class])
+interface MainScreenComponent {
 
     fun inject(fragment: TaxisListFragment)
 

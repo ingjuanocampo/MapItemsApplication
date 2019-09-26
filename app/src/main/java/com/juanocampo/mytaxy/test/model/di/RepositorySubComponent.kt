@@ -12,11 +12,10 @@ annotation class RepositoryScope
 @Subcomponent(modules = [RepositoryModule::class])
 interface RepositorySubComponent {
 
-    fun providesRepository(): IRepository
+    fun repository(): IRepository
 
     @Subcomponent.Builder
     interface Builder {
-        fun requestModule(module: RepositoryModule): Builder
         fun build(): RepositorySubComponent
     }
 }
