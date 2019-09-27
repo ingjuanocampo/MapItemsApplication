@@ -3,15 +3,21 @@ package com.juanocampo.mytaxy.test
 import android.app.Application
 import com.juanocampo.mytaxy.test.di.AppComponent
 import com.juanocampo.mytaxy.test.di.DaggerAppComponent
-import dagger.android.HasActivityInjector
-import android.app.Activity
+
+import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasAndroidInjector
 import javax.inject.Inject
 
-class TaxiApp: Application(), HasActivityInjector {
+class TaxiApp: Application(), HasAndroidInjector {
+
+
+    override fun androidInjector(): AndroidInjector<Any> {
+        return activityDispatchingAndroidInjector!!
+    }
 
     @Inject
-    lateinit var activityDispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
+    lateinit var activityDispatchingAndroidInjector: DispatchingAndroidInjector<Any>
 
     companion object {
         var instance: TaxiApp? = null
@@ -26,8 +32,5 @@ class TaxiApp: Application(), HasActivityInjector {
         component.inject(this)
     }
 
-    override fun activityInjector(): DispatchingAndroidInjector<Activity> {
-        return activityDispatchingAndroidInjector!!
-    }
 
 }

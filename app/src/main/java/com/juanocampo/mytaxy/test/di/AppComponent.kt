@@ -2,15 +2,14 @@ package com.juanocampo.mytaxy.test.di
 
 import android.app.Application
 import com.juanocampo.mytaxy.test.TaxiApp
-import com.juanocampo.mytaxy.test.view.di.MainScreenComponent
-import com.juanocampo.mytaxy.test.view.di.PresentationMainModule
+import com.juanocampo.mytaxy.test.view.di.MainActivityModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
 
 @Component(modules = [
     AndroidInjectionModule::class,
-    ActivityBuilderModule::class,
+    MainActivityModule::class,
     AppModule::class,
     DataModule::class,
     DomainModule::class])

@@ -1,6 +1,5 @@
 package com.juanocampo.mytaxy.test.view.di
 
-import com.juanocampo.mytaxy.test.data.di.RepositorySubComponent
 import com.juanocampo.mytaxy.test.domain.SyncRepositoryUseCase
 import com.juanocampo.mytaxy.test.presentation.viewmodel.TaxiViewModelFactory
 import dagger.Module

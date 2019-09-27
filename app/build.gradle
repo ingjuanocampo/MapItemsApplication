@@ -25,7 +25,7 @@ dependencies {
 
     def room_version = "1.1.1"
     def lifecycle_version = "1.1.1"
-    def daggerVersion = '2.19'
+    def daggerVersion = '2.24'
     def kotlinCoroutineVersion = '1.0.1'
 
     implementation fileTree(include: ['*.jar'], dir: 'libs')
@@ -52,6 +52,8 @@ dependencies {
     annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
     implementation "com.google.dagger:dagger-android-support:$daggerVersion"
+    kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
+
 
 
     testImplementation 'junit:junit:4.12'

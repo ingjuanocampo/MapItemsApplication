@@ -1,20 +1,19 @@
 package com.juanocampo.mytaxy.test.view
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import com.juanocampo.mytaxy.test.R
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
-import dagger.android.support.HasSupportFragmentInjector
+import dagger.android.HasAndroidInjector
 import javax.inject.Inject
 
 
-class MapsActivity : AppCompatActivity(), HasSupportFragmentInjector {
+class MapsActivity : AppCompatActivity(), HasAndroidInjector {
 
     @Inject
-    lateinit var fragmentDispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
+    lateinit var fragmentDispatchingAndroidInjector: DispatchingAndroidInjector<Any>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
@@ -22,7 +21,7 @@ class MapsActivity : AppCompatActivity(), HasSupportFragmentInjector {
         setContentView(R.layout.activity_maps)
     }
 
-    override fun supportFragmentInjector(): AndroidInjector<Fragment> {
+    override fun androidInjector(): AndroidInjector<Any> {
         return fragmentDispatchingAndroidInjector!!
     }
 }
