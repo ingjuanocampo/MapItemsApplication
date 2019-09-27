@@ -5,7 +5,8 @@ Maps application to visualize items in a app
 - Clean architecture 
 - Repository pattern 
 - Delegate view 
-- Coroutines and RX implemtation 
+- Coroutines vs RX implemtation 
+- Android Dagger Injection  
 - Unit test 
 
 Dependecy design 
