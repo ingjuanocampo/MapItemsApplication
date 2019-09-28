@@ -21,6 +21,7 @@ import com.juanocampo.map.test.presentation.viewmodel.TaxiViewModelFactory
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
+
 class HamburgMapFragment : SupportMapFragment(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
