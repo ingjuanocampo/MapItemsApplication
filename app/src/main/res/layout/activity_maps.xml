@@ -2,7 +2,7 @@
 <android.support.constraint.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools" xmlns:app="http://schemas.android.com/apk/res-auto"
-        tools:context=".MapsActivity"
+        tools:context=".view.MapsActivity"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:id="@+id/map"
-            android:name="com.juanocampo.mytaxy.test.view.fragment.HamburgMapFragment"/>
+            android:name="com.juanocampo.map.test.view.fragment.HamburgMapFragment"/>
 
     <fragment
             app:layout_constraintTop_toBottomOf="@id/map"
@@ -23,7 +23,7 @@
             android:id="@+id/list_container"
             android:layout_width="match_parent"
             android:layout_height="@dimen/list_size"
-            android:name="com.juanocampo.mytaxy.test.view.fragment.TaxisListFragment"
+            android:name="com.juanocampo.map.test.view.fragment.TaxisListFragment"
     />
 
 </android.support.constraint.ConstraintLayout>
