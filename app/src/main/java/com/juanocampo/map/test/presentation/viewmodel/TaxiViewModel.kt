@@ -9,12 +9,13 @@ import android.support.annotation.UiThread
 import android.support.annotation.WorkerThread
 import com.google.android.gms.maps.model.LatLng
 import com.juanocampo.map.test.data.entity.Taxi
-import com.juanocampo.map.test.domain.SyncRepositoryUseCase
+import com.juanocampo.map.test.domain.usecase.SyncRepositoryUseCase
 import com.juanocampo.map.test.domain.entity.SyncRepoStatus
+import com.juanocampo.map.test.domain.usecase.LoginUseCase
 import com.juanocampo.map.test.utils.delegate.model.RecyclerViewType
 import kotlinx.coroutines.*
 
-class TaxiViewModel(private val syncRepositoryUseCase: SyncRepositoryUseCase,
+class TaxiViewModel(private val loginUseCase: LoginUseCase,
                     private val mainDispatcher: CoroutineDispatcher = Dispatchers.Main,
                     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO): ViewModel() {
 
@@ -38,17 +39,11 @@ class TaxiViewModel(private val syncRepositoryUseCase: SyncRepositoryUseCase,
         })
     }
 
-    fun fetchTaxisByLocationPage(p1Lat: Double, p1Lon: Double, p2Lat: Double, p2Lon: Double) {
+    fun fetchTaxisByLocationPage() {
         GlobalScope.launch(ioDispatcher) {
-            val syncStatus = syncRepositoryUseCase(p1Lat,
-                p1Lon,
-                p2Lat,
-                p2Lon)
-            when(syncStatus) {
+            when(val syncStatus = loginUseCase()) {
                 is SyncRepoStatus.Success -> handleSuccessCase(syncStatus.list)
                 is SyncRepoStatus.Error -> handleErrorCase(syncStatus.e)
-
-
             }
 
         }

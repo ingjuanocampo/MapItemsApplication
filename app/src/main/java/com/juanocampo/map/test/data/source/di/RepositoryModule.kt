@@ -1,6 +1,6 @@
 package com.juanocampo.map.test.data.source.di
 
-import com.juanocampo.map.test.domain.IRepository
+import com.juanocampo.map.test.domain.repository.IRepository
 import com.juanocampo.map.test.data.Repository
 import com.juanocampo.map.test.data.source.remote.IRemoteDataSource
 import com.juanocampo.map.test.data.source.remote.RemoteDataSource

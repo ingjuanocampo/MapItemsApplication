@@ -1,7 +1,7 @@
 package com.juanocampo.map.test.domain.di
 
-import com.juanocampo.map.test.data.source.di.RepositorySubComponent
-import com.juanocampo.map.test.domain.SyncRepositoryUseCase
+import com.juanocampo.map.test.domain.usecase.LoginUseCase
+import com.juanocampo.map.test.domain.usecase.SyncRepositoryUseCase
 import dagger.Module
 import dagger.Provides
 
@@ -9,7 +9,6 @@ import dagger.Provides
 class DomainModule {
 
     @Provides
-    fun providesSyncRepositoryUseCase(builder: RepositorySubComponent.Builder) =
-        SyncRepositoryUseCase(builder.build().repository())
-
+    fun providesLoginUseCase(syncRepositoryUseCase: SyncRepositoryUseCase) =
+        LoginUseCase(syncRepositoryUseCase)
 }

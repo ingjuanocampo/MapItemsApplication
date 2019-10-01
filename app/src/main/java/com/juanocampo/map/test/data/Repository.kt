@@ -3,7 +3,7 @@ package com.juanocampo.map.test.data
 import com.juanocampo.map.test.data.entity.Taxi
 import com.juanocampo.map.test.data.source.remote.IRemoteDataSource
 import com.juanocampo.map.test.data.source.remote.mapper.TaxiMapper
-import com.juanocampo.map.test.domain.IRepository
+import com.juanocampo.map.test.domain.repository.IRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

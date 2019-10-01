@@ -1,4 +1,4 @@
-package com.juanocampo.map.test.domain
+package com.juanocampo.map.test.domain.repository
 
 import com.juanocampo.map.test.data.entity.Taxi
 

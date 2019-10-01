@@ -1,6 +1,7 @@
-package com.juanocampo.map.test.domain
+package com.juanocampo.map.test.domain.usecase
 
 import android.support.annotation.WorkerThread
+import com.juanocampo.map.test.domain.repository.IRepository
 import com.juanocampo.map.test.domain.entity.SyncRepoStatus
 
 class SyncRepositoryUseCase(private val iRepository: IRepository) {
