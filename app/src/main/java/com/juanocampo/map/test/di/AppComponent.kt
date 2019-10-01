@@ -2,6 +2,8 @@ package com.juanocampo.map.test.di
 
 import android.app.Application
 import com.juanocampo.map.test.TaxiApp
+import com.juanocampo.map.test.data.di.DataModule
+import com.juanocampo.map.test.domain.di.DomainModule
 import com.juanocampo.map.test.view.di.MainActivityModule
 import dagger.BindsInstance
 import dagger.Component

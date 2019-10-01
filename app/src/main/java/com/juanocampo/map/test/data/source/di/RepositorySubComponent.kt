@@ -1,4 +1,4 @@
-package com.juanocampo.map.test.data.di
+package com.juanocampo.map.test.data.source.di
 
 import com.juanocampo.map.test.domain.IRepository
 import dagger.Subcomponent

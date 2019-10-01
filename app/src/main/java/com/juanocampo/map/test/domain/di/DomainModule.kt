@@ -1,6 +1,6 @@
-package com.juanocampo.map.test.di
+package com.juanocampo.map.test.domain.di
 
-import com.juanocampo.map.test.data.di.RepositorySubComponent
+import com.juanocampo.map.test.data.source.di.RepositorySubComponent
 import com.juanocampo.map.test.domain.SyncRepositoryUseCase
 import dagger.Module
 import dagger.Provides

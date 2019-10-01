@@ -1,4 +1,4 @@
-package com.juanocampo.map.test.data.di
+package com.juanocampo.map.test.data.source.di
 
 import com.juanocampo.map.test.domain.IRepository
 import com.juanocampo.map.test.data.Repository
@@ -31,6 +31,7 @@ class RepositoryModule {
     @Provides
     fun providesMapper() = TaxiMapper()
 
+    @RepositoryScope
     @Provides
     fun providesRepository(iRemoteDataSource: IRemoteDataSource, mapper: TaxiMapper): IRepository =
         Repository(iRemoteDataSource, mapper)
