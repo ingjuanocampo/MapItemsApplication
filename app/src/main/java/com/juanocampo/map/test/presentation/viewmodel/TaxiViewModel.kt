@@ -8,11 +8,11 @@ import android.arch.lifecycle.ViewModel
 import android.support.annotation.UiThread
 import android.support.annotation.WorkerThread
 import com.google.android.gms.maps.model.LatLng
-import com.juanocampo.map.test.data.entity.Taxi
-import com.juanocampo.map.test.domain.usecase.SyncRepositoryUseCase
-import com.juanocampo.map.test.domain.entity.SyncRepoStatus
-import com.juanocampo.map.test.domain.usecase.LoginUseCase
+import com.juanocampo.map.test.presentation.entitity.TaxiViewType
 import com.juanocampo.map.test.utils.delegate.model.RecyclerViewType
+import juanocampo.myapplication.domain.entity.SyncRepoStatus
+import juanocampo.myapplication.domain.entity.Taxi
+import juanocampo.myapplication.domain.usecase.LoginUseCase
 import kotlinx.coroutines.*
 
 class TaxiViewModel(private val loginUseCase: LoginUseCase,
@@ -23,7 +23,7 @@ class TaxiViewModel(private val loginUseCase: LoginUseCase,
     val taxiMapLiveData = MutableLiveData<HashMap<LatLng, RecyclerViewType>>()
 
     private val mapClickedLivedData = MutableLiveData<LatLng>()
-    private val itemCLickedLiveData =  MutableLiveData<Taxi>()
+    private val itemCLickedLiveData =  MutableLiveData<TaxiViewType>()
     private val requestListFocusLiveData: LiveData<RecyclerViewType>
     private val requestMapFocusLiveData: LiveData<LatLng>
 
@@ -41,16 +41,26 @@ class TaxiViewModel(private val loginUseCase: LoginUseCase,
 
     fun fetchTaxisByLocationPage() {
         GlobalScope.launch(ioDispatcher) {
+
             when(val syncStatus = loginUseCase()) {
-                is SyncRepoStatus.Success -> handleSuccessCase(syncStatus.list)
+                is SyncRepoStatus.Success -> {
+                    val uiItems = mapToUiItems(syncStatus.list)
+                    handleSuccessCase(uiItems)
+                }
                 is SyncRepoStatus.Error -> handleErrorCase(syncStatus.e)
             }
 
         }
     }
 
+    private suspend fun mapToUiItems(list: List<Taxi>): List<TaxiViewType> {
+        return withContext(ioDispatcher) {
+            return@withContext list.map { TaxiViewType(it.id, LatLng(it.latLong.latitude, it.latLong.longitude)) }
+        }
+    }
+
     @WorkerThread
-    private suspend fun handleSuccessCase(response: List<Taxi>) {
+    private suspend fun handleSuccessCase(response: List<TaxiViewType>) {
         addItemsAndNotify(response)
     }
 
@@ -62,7 +72,7 @@ class TaxiViewModel(private val loginUseCase: LoginUseCase,
     @WorkerThread
     private suspend fun addItemsAndNotify(itemsToAdd: List<RecyclerViewType>) {
         itemsToAdd.forEach {
-            if (it is Taxi) {
+            if (it is TaxiViewType) {
                 mapItems[it.latLong] = it
             }
         }
@@ -81,7 +91,7 @@ class TaxiViewModel(private val loginUseCase: LoginUseCase,
         mapClickedLivedData.value = latLng
     }
     @UiThread
-    fun setClickedItem(taxi: Taxi) {
+    fun setClickedItem(taxi: TaxiViewType) {
         itemCLickedLiveData.value = taxi
     }
 

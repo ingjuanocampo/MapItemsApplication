@@ -5,20 +5,20 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import com.juanocampo.map.test.R
-import com.juanocampo.map.test.data.entity.Taxi
+import com.juanocampo.map.test.presentation.entitity.TaxiViewType
 import com.juanocampo.map.test.utils.delegate.DelegateAdapter
 
-class TaxiDelegateAdapter(val listener: OnItemListListener): DelegateAdapter<TaxiDelegateAdapter.ViewHolder, Taxi>  {
+class TaxiDelegateAdapter(val listener: OnItemListListener): DelegateAdapter<TaxiDelegateAdapter.ViewHolder, TaxiViewType>  {
 
     interface OnItemListListener {
-        fun onClickedItem(taxi: Taxi)
+        fun onClickedItem(taxi: TaxiViewType)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup): ViewHolder {
         return ViewHolder(parent)
     }
 
-    override fun onBindViewHolder(viewHolder: ViewHolder, viewType: Taxi) {
+    override fun onBindViewHolder(viewHolder: ViewHolder, viewType: TaxiViewType) {
         viewHolder.bind(viewType, listener)
     }
 
@@ -27,7 +27,7 @@ class TaxiDelegateAdapter(val listener: OnItemListListener): DelegateAdapter<Tax
 
         private val title = itemView.findViewById<TextView>(R.id.cab_id)
 
-        fun bind(taxi: Taxi, listener: OnItemListListener) {
+        fun bind(taxi: TaxiViewType, listener: OnItemListListener) {
             title.text = "Cab id: ${taxi.id}"
             itemView.setOnClickListener {
                 listener.onClickedItem(taxi)

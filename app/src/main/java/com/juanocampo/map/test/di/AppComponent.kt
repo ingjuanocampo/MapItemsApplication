@@ -2,12 +2,12 @@ package com.juanocampo.map.test.di
 
 import android.app.Application
 import com.juanocampo.map.test.TaxiApp
-import com.juanocampo.map.test.data.di.DataModule
-import com.juanocampo.map.test.domain.di.DomainModule
 import com.juanocampo.map.test.view.di.MainActivityModule
+import dagger.android.AndroidInjectionModule
+import juanocampo.myapplication.data.di.DataModule
+import juanocampo.myapplication.domain.di.DomainModule
 import dagger.BindsInstance
 import dagger.Component
-import dagger.android.AndroidInjectionModule
 
 @Component(modules = [
     AndroidInjectionModule::class,

@@ -2,8 +2,8 @@ package com.juanocampo.map.test.presentation.viewmodel
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
-import com.juanocampo.map.test.domain.usecase.LoginUseCase
-import com.juanocampo.map.test.domain.usecase.SyncRepositoryUseCase
+import juanocampo.myapplication.domain.usecase.LoginUseCase
+
 
 class TaxiViewModelFactory(private val loginUseCase: LoginUseCase) : ViewModelProvider.Factory {
 
