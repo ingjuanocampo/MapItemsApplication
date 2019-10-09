@@ -8,7 +8,7 @@ import com.juanocampo.map.test.R
 import com.juanocampo.map.test.presentation.entitity.TaxiViewType
 import com.juanocampo.map.test.utils.delegate.DelegateAdapter
 
-class TaxiDelegateAdapter(val listener: OnItemListListener): DelegateAdapter<TaxiDelegateAdapter.ViewHolder, TaxiViewType>  {
+class TaxiDelegateAdapter(val listener: OnItemListListener/* Adapter Scope */): DelegateAdapter<TaxiDelegateAdapter.ViewHolder, TaxiViewType>  {
 
     interface OnItemListListener {
         fun onClickedItem(taxi: TaxiViewType)
@@ -25,10 +25,11 @@ class TaxiDelegateAdapter(val listener: OnItemListListener): DelegateAdapter<Tax
     class ViewHolder(viewGroup: ViewGroup) :
         RecyclerView.ViewHolder(LayoutInflater.from(viewGroup.context).inflate(R.layout.taxi_item, viewGroup, false)) {
 
-        private val title = itemView.findViewById<TextView>(R.id.cab_id)
+        private val title = itemView.findViewById<TextView>(R.id.cab_id) // ViewHolder Scope
 
         fun bind(taxi: TaxiViewType, listener: OnItemListListener) {
-            title.text = "Cab id: ${taxi.id}"
+            val formattedText = "Cab id: ${taxi.id}" // Local Scope
+            title.text = formattedText
             itemView.setOnClickListener {
                 listener.onClickedItem(taxi)
             }

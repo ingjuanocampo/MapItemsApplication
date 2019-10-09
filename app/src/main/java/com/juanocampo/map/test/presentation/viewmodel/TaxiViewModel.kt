@@ -12,10 +12,10 @@ import com.juanocampo.map.test.presentation.entitity.TaxiViewType
 import com.juanocampo.map.test.utils.delegate.model.RecyclerViewType
 import juanocampo.myapplication.domain.entity.SyncRepoStatus
 import juanocampo.myapplication.domain.entity.Taxi
-import juanocampo.myapplication.domain.usecase.LoginUseCase
+import juanocampo.myapplication.domain.usecase.LoadHamburgTaxisUseCase
 import kotlinx.coroutines.*
 
-class TaxiViewModel(private val loginUseCase: LoginUseCase,
+class TaxiViewModel(private val loginUseCase: LoadHamburgTaxisUseCase,
                     private val mainDispatcher: CoroutineDispatcher = Dispatchers.Main,
                     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO): ViewModel() {
 

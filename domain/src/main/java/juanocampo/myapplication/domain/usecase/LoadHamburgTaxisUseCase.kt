@@ -3,7 +3,7 @@ package juanocampo.myapplication.domain.usecase
 import juanocampo.myapplication.domain.entity.MapInfo
 import juanocampo.myapplication.domain.entity.SyncRepoStatus
 
-class LoginUseCase(private val syncRepositoryUseCase: SyncRepositoryUseCase) {
+class LoadHamburgTaxisUseCase(private val syncRepositoryUseCase: SyncRepositoryUseCase) {
 
     suspend operator fun invoke(): SyncRepoStatus {
         //do login
