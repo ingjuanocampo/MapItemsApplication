@@ -5,6 +5,10 @@ import juanocampo.myapplication.domain.entity.SyncRepoStatus
 
 class SyncRepositoryUseCase(private val iRepository: IRepository) {
 
+    init {
+        println("Instances: ${this::class.java.name}  ${this.hashCode()}")
+    }
+
     suspend operator fun invoke(
         p1Lat: Double,
         p1Lon: Double,

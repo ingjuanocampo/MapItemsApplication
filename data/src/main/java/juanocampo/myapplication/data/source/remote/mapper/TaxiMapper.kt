@@ -7,6 +7,10 @@ import java.util.*
 class TaxiMapper:
     IMapper<List<TaxiResponse>, List<Taxi>> {
 
+    init {
+        println("Instances: ${this::class.java.name} ${this.hashCode()}")
+    }
+
     override fun mapResponseToAppModel(toParse: List<TaxiResponse>): List<Taxi> {
         val list = ArrayList<Taxi>()
         toParse.forEach {

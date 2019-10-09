@@ -14,6 +14,10 @@ class Repository(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : IRepository {
 
+    init {
+        println("Instances: ${this::class.java.name} ${this.hashCode()}")
+    }
+
     override suspend fun requestTaxisByLocation(
         p1Lat: Double, p1Lon: Double, p2Lat: Double, p2Lon: Double
     ): List<Taxi> {
