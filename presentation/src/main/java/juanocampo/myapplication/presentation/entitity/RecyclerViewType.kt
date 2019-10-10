@@ -1,4 +1,4 @@
-package com.juanocampo.map.test.utils.delegate.model
+package juanocampo.myapplication.presentation.entitity
 
 interface RecyclerViewType {
     fun getDelegateId(): Int

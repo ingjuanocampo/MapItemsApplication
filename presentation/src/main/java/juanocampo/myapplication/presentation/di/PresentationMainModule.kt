@@ -1,7 +1,6 @@
-package com.juanocampo.map.test.presentation.di
+package juanocampo.myapplication.presentation.di
 
-import com.juanocampo.map.test.presentation.viewmodel.TaxiViewModelFactory
-import com.juanocampo.map.test.view.di.MainScreenScope
+import juanocampo.myapplication.presentation.viewmodel.TaxiViewModelFactory
 import dagger.Module
 import dagger.Provides
 import juanocampo.myapplication.domain.usecase.LoadHamburgTaxisUseCase

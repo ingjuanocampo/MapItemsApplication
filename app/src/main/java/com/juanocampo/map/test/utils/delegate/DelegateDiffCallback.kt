@@ -1,7 +1,7 @@
 package com.juanocampo.map.test.utils.delegate
 
 import android.support.v7.util.DiffUtil
-import com.juanocampo.map.test.utils.delegate.model.RecyclerViewType
+import juanocampo.myapplication.presentation.entitity.RecyclerViewType
 
 class DelegateDiffCallback(
     private val oldItems: List<RecyclerViewType>,

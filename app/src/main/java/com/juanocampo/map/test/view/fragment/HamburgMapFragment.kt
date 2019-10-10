@@ -14,12 +14,12 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
 import com.juanocampo.map.test.R
-import com.juanocampo.map.test.presentation.entitity.TaxiViewType
-import com.juanocampo.map.test.utils.delegate.model.RecyclerViewType
-import com.juanocampo.map.test.presentation.viewmodel.TaxiViewModel
-import com.juanocampo.map.test.presentation.viewmodel.TaxiViewModelFactory
 import dagger.android.support.AndroidSupportInjection
 import juanocampo.myapplication.domain.entity.MapInfo
+import juanocampo.myapplication.presentation.entitity.RecyclerViewType
+import juanocampo.myapplication.presentation.entitity.TaxiViewType
+import juanocampo.myapplication.presentation.viewmodel.TaxiViewModel
+import juanocampo.myapplication.presentation.viewmodel.TaxiViewModelFactory
 import javax.inject.Inject
 
 class HamburgMapFragment : SupportMapFragment(), OnMapReadyCallback {

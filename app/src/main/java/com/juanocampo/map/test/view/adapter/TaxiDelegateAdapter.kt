@@ -5,10 +5,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import com.juanocampo.map.test.R
-import com.juanocampo.map.test.presentation.entitity.TaxiViewType
 import com.juanocampo.map.test.utils.delegate.DelegateAdapter
+import juanocampo.myapplication.presentation.entitity.TaxiViewType
 
-class TaxiDelegateAdapter(val listener: OnItemListListener/* Adapter Scope */): DelegateAdapter<TaxiDelegateAdapter.ViewHolder, TaxiViewType>  {
+class TaxiDelegateAdapter(val listener: OnItemListListener/* Adapter Scope */):
+    DelegateAdapter<TaxiDelegateAdapter.ViewHolder, TaxiViewType> {
 
     interface OnItemListListener {
         fun onClickedItem(taxi: TaxiViewType)

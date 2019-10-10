@@ -1,4 +1,4 @@
-package com.juanocampo.map.test.presentation.viewmodel
+package juanocampo.myapplication.presentation.viewmodel
 
 import android.arch.core.util.Function
 import android.arch.lifecycle.LiveData
@@ -8,11 +8,11 @@ import android.arch.lifecycle.ViewModel
 import android.support.annotation.UiThread
 import android.support.annotation.WorkerThread
 import com.google.android.gms.maps.model.LatLng
-import com.juanocampo.map.test.presentation.entitity.TaxiViewType
-import com.juanocampo.map.test.utils.delegate.model.RecyclerViewType
+import juanocampo.myapplication.presentation.entitity.TaxiViewType
 import juanocampo.myapplication.domain.entity.SyncRepoStatus
 import juanocampo.myapplication.domain.entity.Taxi
 import juanocampo.myapplication.domain.usecase.LoadHamburgTaxisUseCase
+import juanocampo.myapplication.presentation.entitity.RecyclerViewType
 import kotlinx.coroutines.*
 
 class TaxiViewModel(private val loginUseCase: LoadHamburgTaxisUseCase,

@@ -1,4 +1,4 @@
-package com.juanocampo.map.test.presentation.viewmodel
+package juanocampo.myapplication.presentation.viewmodel
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider

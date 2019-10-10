@@ -2,7 +2,7 @@ package com.juanocampo.map.test.utils.delegate
 
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
-import com.juanocampo.map.test.utils.delegate.model.RecyclerViewType
+import juanocampo.myapplication.presentation.entitity.RecyclerViewType
 
 interface DelegateAdapter<VH : RecyclerView.ViewHolder, VT : RecyclerViewType> {
 

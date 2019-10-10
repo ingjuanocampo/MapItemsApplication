@@ -1,4 +1,4 @@
-package com.juanocampo.map.test.view.di
+package juanocampo.myapplication.presentation.di
 
 import javax.inject.Scope
 

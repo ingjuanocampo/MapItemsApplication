@@ -2,7 +2,7 @@ package com.juanocampo.map.test.utils.delegate
 
 import android.support.v4.util.SparseArrayCompat
 import android.support.v7.widget.RecyclerView
-import com.juanocampo.map.test.utils.delegate.model.RecyclerViewType
+import juanocampo.myapplication.presentation.entitity.RecyclerViewType
 
 @Suppress("UNCHECKED_CAST")
 fun <E : DelegateAdapter<RecyclerView.ViewHolder, RecyclerViewType>> SparseArrayCompat<E>.appendDelegate(

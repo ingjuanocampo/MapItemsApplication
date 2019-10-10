@@ -1,7 +1,6 @@
-package com.juanocampo.map.test.presentation.entitity
+package juanocampo.myapplication.presentation.entitity
 
 import com.google.android.gms.maps.model.LatLng
-import com.juanocampo.map.test.utils.delegate.model.RecyclerViewType
 
 class TaxiViewType(val id: Int, val latLong: LatLng): RecyclerViewType {
 

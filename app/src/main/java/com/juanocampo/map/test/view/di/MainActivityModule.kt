@@ -1,11 +1,12 @@
 package com.juanocampo.map.test.view.di
 
-import com.juanocampo.map.test.presentation.di.PresentationMainModule
 import com.juanocampo.map.test.view.MapsActivity
 import com.juanocampo.map.test.view.fragment.HamburgMapFragment
 import com.juanocampo.map.test.view.fragment.TaxisListFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
+import juanocampo.myapplication.presentation.di.MainScreenScope
+import juanocampo.myapplication.presentation.di.PresentationMainModule
 
 @Module
 abstract class MainActivityModule {
