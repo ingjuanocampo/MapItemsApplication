@@ -5,30 +5,32 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import com.juanocampo.map.test.R
-import com.juanocampo.map.test.data.entity.Taxi
 import com.juanocampo.map.test.utils.delegate.DelegateAdapter
+import juanocampo.myapplication.presentation.entitity.TaxiViewType
 
-class TaxiDelegateAdapter(val listener: OnItemListListener): DelegateAdapter<TaxiDelegateAdapter.ViewHolder, Taxi>  {
+class TaxiDelegateAdapter(val listener: OnItemListListener/* Adapter Scope */):
+    DelegateAdapter<TaxiDelegateAdapter.ViewHolder, TaxiViewType> {
 
     interface OnItemListListener {
-        fun onClickedItem(taxi: Taxi)
+        fun onClickedItem(taxi: TaxiViewType)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup): ViewHolder {
         return ViewHolder(parent)
     }
 
-    override fun onBindViewHolder(viewHolder: ViewHolder, viewType: Taxi) {
+    override fun onBindViewHolder(viewHolder: ViewHolder, viewType: TaxiViewType) {
         viewHolder.bind(viewType, listener)
     }
 
     class ViewHolder(viewGroup: ViewGroup) :
         RecyclerView.ViewHolder(LayoutInflater.from(viewGroup.context).inflate(R.layout.taxi_item, viewGroup, false)) {
 
-        private val title = itemView.findViewById<TextView>(R.id.cab_id)
+        private val title = itemView.findViewById<TextView>(R.id.cab_id) // ViewHolder Scope
 
-        fun bind(taxi: Taxi, listener: OnItemListListener) {
-            title.text = "Cab id: ${taxi.id}"
+        fun bind(taxi: TaxiViewType, listener: OnItemListListener) {
+            val formattedText = "Cab id: ${taxi.id}" // Local Scope
+            title.text = formattedText
             itemView.setOnClickListener {
                 listener.onClickedItem(taxi)
             }

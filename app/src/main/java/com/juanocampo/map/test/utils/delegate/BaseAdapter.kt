@@ -4,7 +4,7 @@ import android.support.v4.util.SparseArrayCompat
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
-import com.juanocampo.map.test.utils.delegate.model.RecyclerViewType
+import juanocampo.myapplication.presentation.entitity.RecyclerViewType
 
 open class BaseAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

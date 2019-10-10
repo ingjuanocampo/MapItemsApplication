@@ -14,12 +14,12 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
 import com.juanocampo.map.test.R
-import com.juanocampo.map.test.data.entity.Taxi
-import com.juanocampo.map.test.domain.entity.MapInfo
-import com.juanocampo.map.test.utils.delegate.model.RecyclerViewType
-import com.juanocampo.map.test.presentation.viewmodel.TaxiViewModel
-import com.juanocampo.map.test.presentation.viewmodel.TaxiViewModelFactory
 import dagger.android.support.AndroidSupportInjection
+import juanocampo.myapplication.domain.entity.MapInfo
+import juanocampo.myapplication.presentation.entitity.RecyclerViewType
+import juanocampo.myapplication.presentation.entitity.TaxiViewType
+import juanocampo.myapplication.presentation.viewmodel.TaxiViewModel
+import juanocampo.myapplication.presentation.viewmodel.TaxiViewModelFactory
 import javax.inject.Inject
 
 class HamburgMapFragment : SupportMapFragment(), OnMapReadyCallback {
@@ -46,7 +46,7 @@ class HamburgMapFragment : SupportMapFragment(), OnMapReadyCallback {
     private fun addMarkerToMap(taxis: ArrayList<RecyclerViewType>) {
         mMap.clear()
         taxis.forEach {
-            if (it is Taxi) {
+            if (it is TaxiViewType) {
                 val markerOptions = MarkerOptions()
                 markerOptions.position(it.latLong)
                 markerOptions.title("Cab id: ${it.id}")
@@ -59,8 +59,9 @@ class HamburgMapFragment : SupportMapFragment(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         mMap.moveCamera(CameraUpdateFactory.zoomTo(10.0f))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(MapInfo.HAMBURG))
-        mMap.setLatLngBoundsForCameraTarget(MapInfo.HAMBURG_BOUND)
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(LatLng(MapInfo.HAMBURG.latitude, MapInfo.HAMBURG.longitude)))
+        mMap.setLatLngBoundsForCameraTarget(LatLngBounds(LatLng(MapInfo.HAMBURG_BOUND.first.latitude, MapInfo.HAMBURG_BOUND.first.longitude),
+            LatLng(MapInfo.HAMBURG_BOUND.second.latitude, MapInfo.HAMBURG_BOUND.second.longitude)))
 
         mMap.setOnMarkerClickListener {
             animateCamera(it.position)

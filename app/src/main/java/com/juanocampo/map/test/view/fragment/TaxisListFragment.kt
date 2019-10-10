@@ -11,15 +11,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.juanocampo.map.test.R
-import com.juanocampo.map.test.data.entity.Taxi
 import com.juanocampo.map.test.view.adapter.TaxiAdapter
 import com.juanocampo.map.test.view.adapter.TaxiDelegateAdapter
-import com.juanocampo.map.test.presentation.viewmodel.TaxiViewModel
-import com.juanocampo.map.test.presentation.viewmodel.TaxiViewModelFactory
 import kotlinx.android.synthetic.main.list_view.*
 import javax.inject.Inject
 import dagger.android.support.AndroidSupportInjection
 import android.content.Context
+import juanocampo.myapplication.presentation.entitity.TaxiViewType
+import juanocampo.myapplication.presentation.viewmodel.TaxiViewModel
+import juanocampo.myapplication.presentation.viewmodel.TaxiViewModelFactory
 
 
 class TaxisListFragment: Fragment(), TaxiDelegateAdapter.OnItemListListener {
@@ -75,7 +75,7 @@ class TaxisListFragment: Fragment(), TaxiDelegateAdapter.OnItemListListener {
         snapHelper.attachToRecyclerView(taxList)
     }
 
-    override fun onClickedItem(taxi: Taxi) {
+    override fun onClickedItem(taxi: TaxiViewType) {
         viewModel.setClickedItem(taxi)
     }
 }
